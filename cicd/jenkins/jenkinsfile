@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps { sh 'docker build -t ai-app:latest .' }
+    }
+    stage('Scan') {
+      steps { sh 'trivy image ai-app:latest' }
+    }
+    stage('Push') {
+      steps { echo "Push to registry" }
+    }
+  }
+}
+
